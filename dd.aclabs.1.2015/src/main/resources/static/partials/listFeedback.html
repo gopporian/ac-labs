@@ -1,9 +1,30 @@
 <div>
 	<h1>All Feedbacks</h1>
-	<table class="table table-striped">
-		<tr ng-repeat="feedback in feedbacks">
-			<td>{{feedback.name}}</td>
-			<td>{{feedback.message}}</td>
-		</tr>
+	<table class="table table-striped" ng-show="hasFeedback">
+		<thead>
+			<tr>
+				<td><strong>Name</strong></td>
+				<td><strong>Message</strong></td>
+				<td></td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="feedback in feedbacks">
+				<td>{{feedback.name}}</td>
+				<td>{{feedback.message}}</td>
+				<td width="30">
+					<a ng-click="removeFeedback(feedback.id)">
+						<span class="glyphicon glyphicon-remove alert-danger" aria-hidden="true"></span>
+					</a>
+				</td>
+				<td width="30">
+					<a data-toggle="modal" data-target="#editFeedbackModal" ng-click="showFeedbackEdit(feedback)">
+						<span class="glyphicon glyphicon-pencil alter-info" aria-hidden="true"></span>
+					</a>
+				</td>
+			</tr>
+		</tbody>
 	</table>
+	
+	<div ng-include="'partials/editFeedbackModal.html'"></div>
 </div>

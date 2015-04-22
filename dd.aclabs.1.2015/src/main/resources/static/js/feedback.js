@@ -14,16 +14,45 @@ feedbackApp.config([ '$routeProvider', function($routeProvider) {
 	}).otherwise({
 		redirectTo : '/'
 	});
-} ]);
+}]);
 
 views.controller('ListFeedbackController', function($scope, $http) {
-	$http.get('/feedback').success(function(data) {
-		$scope.feedbacks = data;
-	});
+	$scope.hasFeedback = false;
+	
+	$scope.loadFeedbacks = function(){
+		$http.get('/feedback').success(function(data) {
+			$scope.feedbacks = data;
+			$scope.hasFeedback = $scope.feedbacks && $scope.feedbacks.length > 0;
+		});
+	}
+	
+	$scope.removeFeedback = function(id){
+		$http.delete('/feedback/'+id).success(function(){
+			$scope.loadFeedbacks();
+		});
+	}
+	
+	$scope.showFeedbackEdit = function(feedback){
+		$scope.editFeedback = {};
+		$scope.editFeedback.name = feedback.name;
+		$scope.editFeedback.message = feedback.message;
+		$scope.editFeedback.id = feedback.id;
+	}
+	
+	$scope.saveFeedbackEdit = function(){
+		$http.post('/feedback', $scope.editFeedback).success(function(){
+			$scope.loadFeedbacks();
+			$scope.editFeedback = {};
+			$('#editFeedbackModal').modal('toggle');
+		});
+	}
+	
+	$scope.loadFeedbacks();
 });
 
 views.controller('AddFeedbackController', function($scope, $http) {
 	$scope.addFeedback = function(){
+		console.log('adding ...');
 		$http.post('/feedback', $scope.newFeedback);
 		$scope.newFeedback = {};
 	};

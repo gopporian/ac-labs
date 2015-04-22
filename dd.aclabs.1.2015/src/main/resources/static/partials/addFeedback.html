@@ -1,16 +1,16 @@
 <div>
 	<h1>Submit Feedback</h1>
-	<form>
+	<form ng-submit="addFeedback()">
 		<div class="form-group">
 			<label class="control-label" for="name">Name:</label> <input type="text" class="form-control" name="name"
-				placeholder="Name ..." ng-model="newFeedback.name" />
+				placeholder="Name ..." ng-model="newFeedback.name" required />
 		</div>
 		<div class="form-group">
 			<label class="control-label" for="message">Message:</label> <input class="form-control" name="message"
-				placeholder="Enter your feedback here ..." ng-model="newFeedback.message" />
+				placeholder="Enter your feedback here ..." ng-model="newFeedback.message" required />
 		</div>
 		<div class="form-group">
-			<button class="btn btn-default" ng-click="addFeedback()">Add Feedback!</button>
+			<button type="submit" class="btn btn-primary">Add Feedback!</button>
 		</div>
 	</form>
 </div>
