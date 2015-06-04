@@ -1,19 +1,22 @@
 package dd.aclabs.project.config;
 
-import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
+import javax.sql.DataSource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.sql.DataSource;
+import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
 
 /**
  * Created by lcondescu on 03.06.2015.
  */
 @Configuration
 @EnableTransactionManagement
+@EnableAspectJAutoProxy(proxyTargetClass = true) 
 public class DataSourceConfiguration {
 
     @Bean

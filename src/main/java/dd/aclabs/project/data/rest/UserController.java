@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import dd.aclabs.project.data.User;
-import dd.aclabs.project.data.service.UserServiceImpl;
+import dd.aclabs.project.data.service.UserService;
 
+/**
+ * Created by Maris Alexandru
+ */
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
@@ -21,7 +24,7 @@ public class UserController {
 	private final static Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 	
 	@Autowired
-	private UserServiceImpl userService;
+	private UserService userService;
 	
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
 	private Iterable<User> getAllUsers() {

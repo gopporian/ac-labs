@@ -1,19 +1,25 @@
 package dd.aclabs.project.data.service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import dd.aclabs.project.data.User;
-import dd.aclabs.project.data.repository.UserRepository;
+import dd.aclabs.project.data.repository.BaseDAO;
 
+/**
+ * Created by Maris Alexandru
+ */
 @Service
-public class UserServiceImpl extends BaseServiceImpl<User, Long> {
+@Transactional(rollbackFor = { RuntimeException.class })
+public class UserServiceImpl extends BaseServiceImpl<User, Long> implements UserService{
 
 	@Autowired
-	protected UserRepository userRepository;
+	@Qualifier("userRepository")
+	protected BaseDAO<User,Long> userRepository;
 	
 	@Override
-	public CrudRepository<User, Long> getRepository() {
+	public BaseDAO<User, Long> getRepository() {
 		return userRepository;
 	} 
 	

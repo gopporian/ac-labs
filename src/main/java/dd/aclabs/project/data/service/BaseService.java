@@ -2,6 +2,9 @@ package dd.aclabs.project.data.service;
 
 import java.util.List;
 
+/**
+ * Created by Maris Alexandru
+ */
 public interface BaseService <T,K>{
 	
 	public T save(T entity);
